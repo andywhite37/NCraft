@@ -55,7 +55,6 @@
     <Compile Include="Tags\ShortTag.cs" />
     <Compile Include="Tags\StringTag.cs" />
     <Compile Include="Tags\Tag.cs" />
-    <Compile Include="Tags\TagSerializer.cs" />
     <Compile Include="Tags\TagType.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

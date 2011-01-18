@@ -13,11 +13,16 @@ namespace NCraft.Tags
 
         public override void ReadFrom(Stream stream, bool readName)
         {
-            if (readName)
-            {
-                Name = stream.ReadString();
-            }
+            base.ReadFrom(stream, readName);
+
             Value = stream.ReadFloat();
+        }
+
+        public override void WriteTo(Stream stream, bool writeType, bool writeName)
+        {
+            base.WriteTo(stream, writeType, writeName);
+
+            stream.WriteFloat(Value);
         }
     }
 }

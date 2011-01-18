@@ -21,20 +21,29 @@ namespace NCraft.Tags
 
         public override void ReadFrom(Stream stream, bool readName)
         {
-            if (readName)
-            {
-                Name = stream.ReadString();
-            }
+            base.ReadFrom(stream, readName);
 
             ItemType = (byte)stream.ReadByte();
-            Length = stream.ReadInt32();
+            Length = stream.ReadInt();
 
-            var serializer = new TagSerializer();
             for (int i = 0; i < Length; ++i)
             {
                 var tag = TagType.CreateTag(ItemType);
                 tag.ReadFrom(stream, false);
                 Value.Add(tag);
+            }
+        }
+
+        public override void WriteTo(Stream stream, bool writeType, bool writeName)
+        {
+            base.WriteTo(stream, writeType, writeName);
+
+            stream.WriteByte(ItemType);
+            stream.WriteInt(Length);
+
+            for (int i = 0; i < Length; ++i)
+            {
+                Value[i].WriteTo(stream, false, false);
             }
         }
 

@@ -41,5 +41,21 @@ namespace NCraft.Test.Tags
             Assert.AreEqual("TAG_List", TagType.GetName(TagType.List));
             Assert.AreEqual("TAG_Compound", TagType.GetName(TagType.Compound));
         }
+
+        [Test]
+        public void TagTypeCreateTagTest()
+        {
+            Assert.IsInstanceOf(typeof(EndTag), TagType.CreateTag(TagType.End));
+            Assert.IsInstanceOf(typeof(ByteTag), TagType.CreateTag(TagType.Byte));
+            Assert.IsInstanceOf(typeof(ShortTag), TagType.CreateTag(TagType.Short));
+            Assert.IsInstanceOf(typeof(IntTag), TagType.CreateTag(TagType.Int));
+            Assert.IsInstanceOf(typeof(LongTag), TagType.CreateTag(TagType.Long));
+            Assert.IsInstanceOf(typeof(FloatTag), TagType.CreateTag(TagType.Float));
+            Assert.IsInstanceOf(typeof(DoubleTag), TagType.CreateTag(TagType.Double));
+            Assert.IsInstanceOf(typeof(ByteArrayTag), TagType.CreateTag(TagType.ByteArray));
+            Assert.IsInstanceOf(typeof(StringTag), TagType.CreateTag(TagType.String));
+            Assert.IsInstanceOf(typeof(ListTag), TagType.CreateTag(TagType.List));
+            Assert.IsInstanceOf(typeof(CompoundTag), TagType.CreateTag(TagType.Compound));
+        }
     }
 }

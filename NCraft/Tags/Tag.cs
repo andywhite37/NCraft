@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Runtime.Serialization;
 using System.IO;
+using NCraft.Util;
 
 namespace NCraft.Tags
 {
@@ -18,7 +19,31 @@ namespace NCraft.Tags
             ReadFrom(stream, true);
         }
 
-        public abstract void ReadFrom(Stream stream, bool readName);
+        public virtual void ReadFrom(Stream stream, bool readName)
+        {
+            if (readName)
+            {
+                Name = stream.ReadString();
+            }
+        }
+
+        public void WriteTo(Stream stream)
+        {
+            WriteTo(stream, true, true);
+        }
+
+        public virtual void WriteTo(Stream stream, bool writeType, bool writeName)
+        {
+            if (writeType)
+            {
+                stream.WriteByte(Type);
+            }
+
+            if (writeName)
+            {
+                stream.WriteString(Name);
+            }
+        }
 
         public override string ToString()
         {

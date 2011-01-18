@@ -5,6 +5,7 @@ using System.IO.Compression;
 using System.Linq;
 using System.Text;
 using NCraft.Tags;
+using NCraft.Util;
 
 namespace NCraft
 {
@@ -19,17 +20,39 @@ namespace NCraft
         {
             using (var fileStream = new FileStream(filePath, FileMode.Open))
             {
-                var serializer = new TagSerializer();
                 if (isGZipped)
                 {
                     using (var gzipStream = new GZipStream(fileStream, CompressionMode.Decompress))
                     {
-                        return serializer.Deserialize(gzipStream);
+                        return gzipStream.ReadTag();
                     }
                 }
                 else
                 {
-                    return serializer.Deserialize(fileStream);
+                    return fileStream.ReadTag();
+                }
+            }
+        }
+
+        public static void Save(Tag tag, string filePath)
+        {
+            Save(tag, filePath, true);
+        }
+
+        public static void Save(Tag tag, string filePath, bool isGZipped)
+        {
+            using (var fileStream = new FileStream(filePath, FileMode.OpenOrCreate, FileAccess.Write))
+            {
+                if (isGZipped)
+                {
+                    using (var gzipStream = new GZipStream(fileStream, CompressionMode.Compress))
+                    {
+                        gzipStream.WriteTag(tag);
+                    }
+                }
+                else
+                {
+                    fileStream.WriteTag(tag);
                 }
             }
         }

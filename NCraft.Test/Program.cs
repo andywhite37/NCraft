@@ -1,24 +1,32 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using NUnit.Core;
-using System.Reflection;
-using System.IO;
-using NUnit.Core.Builders;
-using log4net;
-using NUnit.Util;
-using NUnit.Framework;
 using System.Diagnostics;
+using System.IO;
+using System.Linq;
+using System.Reflection;
+using System.Text;
+using log4net;
+using NUnit.Core;
+using NUnit.Core.Builders;
+using NUnit.Framework;
+using NUnit.Util;
 
 [assembly: log4net.Config.XmlConfigurator(Watch = true)]
 
 namespace NCraft.Test
 {
+    /// <summary>
+    /// Program for running the NUnit tests in this project
+    /// </summary>
     class Program
     {
         private static ILog Logger = LogManager.GetLogger(typeof(Program));
 
+        /// <summary>
+        /// This is a "manual" test runner for the NUnit tests.  I made this so I can easily
+        /// debug the individual tests without having to attach the debugger to the NUnit GUI process, etc.
+        /// </summary>
+        /// <param name="args"></param>
         static void Main(String[] args)
         {
             Debug.WriteLine("TestRunner starting...");
@@ -38,6 +46,10 @@ namespace NCraft.Test
         }
     }
 
+    /// <summary>
+    /// Logs important info to the "Output" window.  Can't use Console.WriteLine or log4net b/c NUnit hijacks
+    /// Console.Out and log4net logging.  Maybe you can, but I didn't bother trying to figure it out.
+    /// </summary>
     public class LoggingEventListener : EventListener
     {
         private static ILog Logger = LogManager.GetLogger(typeof(LoggingEventListener));

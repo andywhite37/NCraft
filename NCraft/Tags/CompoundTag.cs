@@ -18,16 +18,11 @@ namespace NCraft.Tags
 
         public override void ReadFrom(Stream stream, bool readName)
         {
-            if (readName)
-            {
-                Name = stream.ReadString();
-            }
-
-            var serializer = new TagSerializer();
+            base.ReadFrom(stream, readName);
 
             while (true)
             {
-                var tag = serializer.Deserialize(stream);
+                var tag = stream.ReadTag();
 
                 if (tag.Type == TagType.End)
                 {
@@ -36,6 +31,19 @@ namespace NCraft.Tags
 
                 Value.Add(tag);
             }
+        }
+
+        public override void WriteTo(Stream stream, bool writeType, bool writeName)
+        {
+            base.WriteTo(stream, writeType, writeName);
+
+            foreach (var tag in Value)
+            {
+                tag.WriteTo(stream);
+            }
+
+            var endTag = TagType.CreateTag(TagType.End);
+            endTag.WriteTo(stream, true, false);
         }
 
         public override string ToString(string indent)

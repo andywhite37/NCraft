@@ -15,6 +15,11 @@ namespace NCraft.Tags
             // No-op
         }
 
+        public override void WriteTo(Stream stream, bool writeType, bool writeName)
+        {
+            stream.WriteByte(Type);
+        }
+
         public override string ToString(string indent)
         {
             throw new InvalidOperationException("Cannot convert EndTag to string.");
