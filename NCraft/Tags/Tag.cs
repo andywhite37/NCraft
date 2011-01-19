@@ -71,4 +71,33 @@ namespace NCraft.Tags
             return sb.ToString();
         }
     }
+
+    public abstract class ArrayTag<T> : Tag
+    {
+        public T[] Items { get; set; }
+        public int Length { get; set; }
+
+        public T this[int index]
+        {
+            get { return Items[index]; }
+            set { Items[index] = value; }
+        }
+    }
+
+    public abstract class ListTag<T> : Tag where T : Tag
+    {
+        public List<T> Items { get; set; }
+
+        public T this[int index]
+        {
+            get { return Items[index]; }
+            set { Items[index] = value; }
+        }
+
+        public T this[string name]
+        {
+            get { return Items.Single(t => t.Name == name); }
+            set { this[name] = value; }
+        }
+    }
 }

@@ -127,11 +127,11 @@ namespace NCraft.Test
             Assert.AreEqual(TagType.Compound, tag.Type);
             Assert.AreEqual("TAG_Compound", tag.TypeName);
 
-            Assert.IsNotNull(tag.Value);
+            Assert.IsNotNull(tag.Items);
 
-            Assert.AreEqual(1, tag.Value.Count);
+            Assert.AreEqual(1, tag.Items.Count);
 
-            var subTag = (StringTag)tag.Value.First();
+            var subTag = (StringTag)tag.Items.First();
 
             Assert.AreEqual("name", subTag.Name);
             Assert.AreEqual(TagType.String, subTag.Type);
@@ -141,77 +141,77 @@ namespace NCraft.Test
         private void AssertBigTestNbt(CompoundTag tag)
         {
             Assert.AreEqual("Level", tag.Name);
-            Assert.AreEqual(11, tag.Value.Count);
+            Assert.AreEqual(11, tag.Items.Count);
 
-            var longTest = (LongTag)tag.Value.Single(t => t.Name == "longTest");
+            var longTest = (LongTag)tag.Items.Single(t => t.Name == "longTest");
             Assert.AreEqual((long)9223372036854775807L, longTest.Value);
 
-            var shortTest = (ShortTag)tag.Value.Single(t => t.Name == "shortTest");
+            var shortTest = (ShortTag)tag.Items.Single(t => t.Name == "shortTest");
             Assert.AreEqual((short)32767, shortTest.Value);
 
-            var stringTest = (StringTag)tag.Value.Single(t => t.Name == "stringTest");
+            var stringTest = (StringTag)tag.Items.Single(t => t.Name == "stringTest");
             Assert.AreEqual("HELLO WORLD THIS IS A TEST STRING ÅÄÖ!", stringTest.Value);
 
-            var floatTest = (FloatTag)tag.Value.Single(t => t.Name == "floatTest");
+            var floatTest = (FloatTag)tag.Items.Single(t => t.Name == "floatTest");
             Assert.AreEqual(0.49823147F, floatTest.Value);
 
-            var intTest = (IntTag)tag.Value.Single(t => t.Name == "intTest");
+            var intTest = (IntTag)tag.Items.Single(t => t.Name == "intTest");
             Assert.AreEqual(2147483647, intTest.Value);
 
-            var nestedCompoundTest = (CompoundTag)tag.Value.Single(t => t.Name == "nested compound test");
-            Assert.AreEqual(2, nestedCompoundTest.Value.Count);
-            var ham = (CompoundTag)nestedCompoundTest.Value.Single(t => t.Name == "ham");
-            Assert.AreEqual(2, ham.Value.Count);
-            var hamName = (StringTag)ham.Value.Single(t => t.Name == "name");
+            var nestedCompoundTest = (CompoundTag)tag.Items.Single(t => t.Name == "nested compound test");
+            Assert.AreEqual(2, nestedCompoundTest.Items.Count);
+            var ham = (CompoundTag)nestedCompoundTest.Items.Single(t => t.Name == "ham");
+            Assert.AreEqual(2, ham.Items.Count);
+            var hamName = (StringTag)ham.Items.Single(t => t.Name == "name");
             Assert.AreEqual("Hampus", hamName.Value);
-            var hamValue = (FloatTag)ham.Value.Single(t => t.Name == "value");
+            var hamValue = (FloatTag)ham.Items.Single(t => t.Name == "value");
             Assert.AreEqual(0.75F, hamValue.Value);
-            var egg = (CompoundTag)nestedCompoundTest.Value.Single(t => t.Name == "egg");
-            Assert.AreEqual(2, egg.Value.Count);
-            var eggName = (StringTag)egg.Value.Single(t => t.Name == "name");
+            var egg = (CompoundTag)nestedCompoundTest.Items.Single(t => t.Name == "egg");
+            Assert.AreEqual(2, egg.Items.Count);
+            var eggName = (StringTag)egg.Items.Single(t => t.Name == "name");
             Assert.AreEqual("Eggbert", eggName.Value);
-            var eggValue = (FloatTag)egg.Value.Single(t => t.Name == "value");
+            var eggValue = (FloatTag)egg.Items.Single(t => t.Name == "value");
             Assert.AreEqual(0.5F, eggValue.Value);
 
-            var listTestLong = (ListTag)tag.Value.Single(t => t.Name == "listTest (long)");
+            var listTestLong = (ListTag)tag.Items.Single(t => t.Name == "listTest (long)");
             Assert.AreEqual(5, listTestLong.Length);
             Assert.AreEqual(TagType.Long, listTestLong.ItemType);
-            Assert.IsTrue(listTestLong.Value.All(i => i.GetType() == typeof(LongTag)));
-            Assert.IsTrue(listTestLong.Value.All(i => i.Name == null)); // ListTag items do not have Names
-            Assert.IsTrue(((LongTag)listTestLong.Value[0]).Value == 11);
-            Assert.IsTrue(((LongTag)listTestLong.Value[1]).Value == 12);
-            Assert.IsTrue(((LongTag)listTestLong.Value[2]).Value == 13);
-            Assert.IsTrue(((LongTag)listTestLong.Value[3]).Value == 14);
-            Assert.IsTrue(((LongTag)listTestLong.Value[4]).Value == 15);
+            Assert.IsTrue(listTestLong.Items.All(i => i.GetType() == typeof(LongTag)));
+            Assert.IsTrue(listTestLong.Items.All(i => i.Name == null)); // ListTag items do not have Names
+            Assert.IsTrue(((LongTag)listTestLong.Items[0]).Value == 11);
+            Assert.IsTrue(((LongTag)listTestLong.Items[1]).Value == 12);
+            Assert.IsTrue(((LongTag)listTestLong.Items[2]).Value == 13);
+            Assert.IsTrue(((LongTag)listTestLong.Items[3]).Value == 14);
+            Assert.IsTrue(((LongTag)listTestLong.Items[4]).Value == 15);
 
-            var listTestCompound = (ListTag)tag.Value.Single(t => t.Name == "listTest (compound)");
+            var listTestCompound = (ListTag)tag.Items.Single(t => t.Name == "listTest (compound)");
             Assert.AreEqual(2, listTestCompound.Length);
             Assert.AreEqual(TagType.Compound, listTestCompound.ItemType);
-            Assert.IsTrue(listTestCompound.Value.All(i => i.GetType() == typeof(CompoundTag)));
-            Assert.IsTrue(listTestCompound.Value.All(i => i.Name == null)); // ListTag items do not have Names
-            var first = (CompoundTag)listTestCompound.Value[0];
-            var firstName = (StringTag)first.Value.Single(t => t.Name == "name");
+            Assert.IsTrue(listTestCompound.Items.All(i => i.GetType() == typeof(CompoundTag)));
+            Assert.IsTrue(listTestCompound.Items.All(i => i.Name == null)); // ListTag items do not have Names
+            var first = (CompoundTag)listTestCompound.Items[0];
+            var firstName = (StringTag)first.Items.Single(t => t.Name == "name");
             Assert.AreEqual("Compound tag #0", firstName.Value);
-            var firstCreatedOn = (LongTag)first.Value.Single(t => t.Name == "created-on");
+            var firstCreatedOn = (LongTag)first.Items.Single(t => t.Name == "created-on");
             Assert.AreEqual(1264099775885L, firstCreatedOn.Value);
-            var second = (CompoundTag)listTestCompound.Value[1];
-            var secondName = (StringTag)second.Value.Single(t => t.Name == "name");
+            var second = (CompoundTag)listTestCompound.Items[1];
+            var secondName = (StringTag)second.Items.Single(t => t.Name == "name");
             Assert.AreEqual("Compound tag #1", secondName.Value);
-            var secondCreatedOn = (LongTag)second.Value.Single(t => t.Name == "created-on");
+            var secondCreatedOn = (LongTag)second.Items.Single(t => t.Name == "created-on");
             Assert.AreEqual(1264099775885L, secondCreatedOn.Value);
 
-            var byteTest = (ByteTag)tag.Value.Single(t => t.Name == "byteTest");
+            var byteTest = (ByteTag)tag.Items.Single(t => t.Name == "byteTest");
             Assert.AreEqual((byte)127, byteTest.Value);
 
-            var byteArrayTest = (ByteArrayTag)tag.Value.Single(t => t.Name == "byteArrayTest (the first 1000 values of (n*n*255+n*7)%100, starting with n=0 (0, 62, 34, 16, 8, ...))");
+            var byteArrayTest = (ByteArrayTag)tag.Items.Single(t => t.Name == "byteArrayTest (the first 1000 values of (n*n*255+n*7)%100, starting with n=0 (0, 62, 34, 16, 8, ...))");
             Assert.AreEqual(1000, byteArrayTest.Length);
             for (int i = 0; i < 1000; ++i)
             {
                 var calculated = (i * i * 255 + i * 7) % 100;
-                Assert.AreEqual(calculated, byteArrayTest.Value[i]);
+                Assert.AreEqual(calculated, byteArrayTest.Items[i]);
             }
 
-            var doubleTest = (DoubleTag)tag.Value.Single(t => t.Name == "doubleTest");
+            var doubleTest = (DoubleTag)tag.Items.Single(t => t.Name == "doubleTest");
             Assert.AreEqual(0.4931287132182315, doubleTest.Value);
         }
 
@@ -228,7 +228,7 @@ namespace NCraft.Test
                 Value = "Bananrama",
             };
 
-            tag.Value.Add(subTag);
+            tag.Items.Add(subTag);
 
             return tag;
         }
@@ -245,45 +245,45 @@ namespace NCraft.Test
                 Name = "longTest",
                 Value = 9223372036854775807L,
             };
-            tag.Value.Add(longTest);
+            tag.Items.Add(longTest);
 
             var shortTest = new ShortTag()
             {
                 Name = "shortTest",
                 Value = 32767,
             };
-            tag.Value.Add(shortTest);
+            tag.Items.Add(shortTest);
 
             var stringTest = new StringTag()
             {
                 Name = "stringTest",
                 Value = @"HELLO WORLD THIS IS A TEST STRING ÅÄÖ!",
             };
-            tag.Value.Add(stringTest);
+            tag.Items.Add(stringTest);
 
             var floatTest = new FloatTag()
             {
                 Name = "floatTest",
                 Value = 0.49823147F,
             };
-            tag.Value.Add(floatTest);
+            tag.Items.Add(floatTest);
 
             var intTest = new IntTag()
             {
                 Name = "intTest",
                 Value = 2147483647,
             };
-            tag.Value.Add(intTest);
+            tag.Items.Add(intTest);
 
             var nestedCompoundTest = new CompoundTag()
             {
                 Name = "nested compound test",
-                Value = new List<Tag>()
+                Items = new List<Tag>()
                 {
                     new CompoundTag()
                     {
                         Name = "ham",
-                        Value = new List<Tag>()
+                        Items = new List<Tag>()
                         {
                             new StringTag()
                             {
@@ -300,7 +300,7 @@ namespace NCraft.Test
                     new CompoundTag()
                     {
                         Name = "egg",
-                        Value = new List<Tag>()
+                        Items = new List<Tag>()
                         {
                             new StringTag()
                             {
@@ -316,14 +316,14 @@ namespace NCraft.Test
                     }
                 },
             };
-            tag.Value.Add(nestedCompoundTest);
+            tag.Items.Add(nestedCompoundTest);
 
             var listTestLong = new ListTag()
             {
                 Name = "listTest (long)",
                 ItemType = TagType.Long,
                 Length = 5,
-                Value = new List<Tag>()
+                Items = new Tag[]
                 {
                     new LongTag()
                     {
@@ -347,18 +347,18 @@ namespace NCraft.Test
                     },
                 },
             };
-            tag.Value.Add(listTestLong);
+            tag.Items.Add(listTestLong);
 
             var listTestCompound = new ListTag()
             {
                 Name = "listTest (compound)",
                 ItemType = TagType.Compound,
                 Length = 2,
-                Value = new List<Tag>()
+                Items = new Tag[]
                 {
                     new CompoundTag()
                     {
-                        Value = new List<Tag>()
+                        Items = new List<Tag>()
                         {
                             new StringTag()
                             {
@@ -374,7 +374,7 @@ namespace NCraft.Test
                     },
                     new CompoundTag()
                     {
-                        Value = new List<Tag>()
+                        Items = new List<Tag>()
                         {
                             new StringTag()
                             {
@@ -390,33 +390,33 @@ namespace NCraft.Test
                     },
                 },
             };
-            tag.Value.Add(listTestCompound);
+            tag.Items.Add(listTestCompound);
 
             var byteTest = new ByteTag()
             {
                 Name = "byteTest",
                 Value = 127,
             };
-            tag.Value.Add(byteTest);
+            tag.Items.Add(byteTest);
 
             var byteArrayTest = new ByteArrayTag()
             {
                 Name = "byteArrayTest (the first 1000 values of (n*n*255+n*7)%100, starting with n=0 (0, 62, 34, 16, 8, ...))",
                 Length = 1000,
-                Value = new byte[1000],
+                Items = new byte[1000],
             };
             for (int i = 0; i < 1000; ++i)
             {
-                byteArrayTest.Value[i] = (byte)((i * i * 255 + i * 7) % 100);
+                byteArrayTest.Items[i] = (byte)((i * i * 255 + i * 7) % 100);
             }
-            tag.Value.Add(byteArrayTest);
+            tag.Items.Add(byteArrayTest);
 
             var doubleTest = new DoubleTag()
             {
                 Name = "doubleTest",
                 Value = 0.4931287132182315,
             };
-            tag.Value.Add(doubleTest);
+            tag.Items.Add(doubleTest);
 
             return tag;
         }

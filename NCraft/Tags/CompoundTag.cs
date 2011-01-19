@@ -7,13 +7,13 @@ using NCraft.Util;
 
 namespace NCraft.Tags
 {
-    public class CompoundTag : Tag<List<Tag>>
+    public class CompoundTag : ListTag<Tag>
     {
         public override byte Type { get { return TagType.Compound; } }
 
         public CompoundTag()
         {
-            Value = new List<Tag>();
+            Items = new List<Tag>();
         }
 
         public override void ReadFrom(Stream stream, bool readName)
@@ -29,7 +29,7 @@ namespace NCraft.Tags
                     break;
                 }
 
-                Value.Add(tag);
+                Items.Add(tag);
             }
         }
 
@@ -37,7 +37,7 @@ namespace NCraft.Tags
         {
             base.WriteTo(stream, writeType, writeName);
 
-            foreach (var tag in Value)
+            foreach (var tag in Items)
             {
                 tag.WriteTo(stream);
             }
@@ -56,9 +56,9 @@ namespace NCraft.Tags
             {
                 sb.AppendFormat("(\"{0}\")", Name);
             }
-            sb.AppendFormat(": {0} entries{1}", Value.Count, Environment.NewLine);
+            sb.AppendFormat(": {0} entries{1}", Items.Count, Environment.NewLine);
             sb.AppendLine(indent + "{");
-            foreach (var item in Value)
+            foreach (var item in Items)
             {
                 sb.AppendLine(item.ToString(indent + "    "));
             }

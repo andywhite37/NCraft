@@ -7,10 +7,9 @@ using NCraft.Util;
 
 namespace NCraft.Tags
 {
-    public class ByteArrayTag : Tag<byte[]>
+    public class ByteArrayTag : ArrayTag<byte>
     {
         public override byte Type { get { return TagType.ByteArray; } }
-        public int Length { get; set; }
 
         public override void ReadFrom(Stream stream, bool readName)
         {
@@ -18,11 +17,11 @@ namespace NCraft.Tags
 
             Length = stream.ReadInt();
 
-            Value = new byte[Length];
+            Items = new byte[Length];
 
             for (int i = 0; i < Length; ++i)
             {
-                Value[i] = (byte)stream.ReadByte();
+                Items[i] = (byte)stream.ReadByte();
             }
         }
 
@@ -34,7 +33,7 @@ namespace NCraft.Tags
 
             for (int i = 0; i < Length; ++i)
             {
-                stream.WriteByte(Value[i]);
+                stream.WriteByte(Items[i]);
             }
         }
 

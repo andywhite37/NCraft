@@ -7,17 +7,11 @@ using NCraft.Util;
 
 namespace NCraft.Tags
 {
-    public class ListTag : Tag<List<Tag>>
+    public class ListTag : ArrayTag<Tag>
     {
         public override byte Type { get { return TagType.List; } }
 
         public byte ItemType { get; set; }
-        public int Length { get; set; }
-
-        public ListTag()
-        {
-            Value = new List<Tag>();
-        }
 
         public override void ReadFrom(Stream stream, bool readName)
         {
@@ -25,12 +19,13 @@ namespace NCraft.Tags
 
             ItemType = (byte)stream.ReadByte();
             Length = stream.ReadInt();
+            Items = new Tag[Length];
 
             for (int i = 0; i < Length; ++i)
             {
                 var tag = TagType.CreateTag(ItemType);
                 tag.ReadFrom(stream, false);
-                Value.Add(tag);
+                Items[i] = tag;
             }
         }
 
@@ -43,7 +38,7 @@ namespace NCraft.Tags
 
             for (int i = 0; i < Length; ++i)
             {
-                Value[i].WriteTo(stream, false, false);
+                Items[i].WriteTo(stream, false, false);
             }
         }
 
@@ -59,7 +54,7 @@ namespace NCraft.Tags
             }
             sb.AppendFormat(": {0} entries of type {1}{2}", Length, TagType.GetName(ItemType), Environment.NewLine);
             sb.AppendLine(indent + "{");
-            foreach (var item in Value)
+            foreach (var item in Items)
             {
                 sb.AppendLine(item.ToString(indent + "    "));
             }
