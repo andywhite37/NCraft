@@ -1,0 +1,186 @@
+﻿TAG_Compound: 1 entries
+{
+    TAG_Compound("Data"): 8 entries
+    {
+        TAG_Long("Time"): 422818
+        TAG_Long("LastPlayed"): 1294594277265
+        TAG_Compound("Player"): 14 entries
+        {
+            TAG_List("Motion"): 3 entries of type TAG_Double
+            {
+                TAG_Double: 3.61053074341395E-07
+                TAG_Double: -0.0784000015258789
+                TAG_Double: -1.43072612962421E-08
+            }
+            TAG_Byte("OnGround"): 1
+            TAG_Short("HurtTime"): 0
+            TAG_Short("Health"): 20
+            TAG_Int("Dimension"): 0
+            TAG_Short("Air"): 300
+            TAG_List("Inventory"): 20 entries of type TAG_Compound
+            {
+                TAG_Compound: 4 entries
+                {
+                    TAG_Short("id"): 274
+                    TAG_Short("Damage"): 25
+                    TAG_Byte("Count"): 1
+                    TAG_Byte("Slot"): 0
+                }
+                TAG_Compound: 4 entries
+                {
+                    TAG_Short("id"): 273
+                    TAG_Short("Damage"): 27
+                    TAG_Byte("Count"): 1
+                    TAG_Byte("Slot"): 1
+                }
+                TAG_Compound: 4 entries
+                {
+                    TAG_Short("id"): 272
+                    TAG_Short("Damage"): 26
+                    TAG_Byte("Count"): 1
+                    TAG_Byte("Slot"): 3
+                }
+                TAG_Compound: 4 entries
+                {
+                    TAG_Short("id"): 291
+                    TAG_Short("Damage"): 0
+                    TAG_Byte("Count"): 1
+                    TAG_Byte("Slot"): 4
+                }
+                TAG_Compound: 4 entries
+                {
+                    TAG_Short("id"): 4
+                    TAG_Short("Damage"): 0
+                    TAG_Byte("Count"): 40
+                    TAG_Byte("Slot"): 5
+                }
+                TAG_Compound: 4 entries
+                {
+                    TAG_Short("id"): 326
+                    TAG_Short("Damage"): 0
+                    TAG_Byte("Count"): 1
+                    TAG_Byte("Slot"): 6
+                }
+                TAG_Compound: 4 entries
+                {
+                    TAG_Short("id"): 320
+                    TAG_Short("Damage"): 0
+                    TAG_Byte("Count"): 1
+                    TAG_Byte("Slot"): 7
+                }
+                TAG_Compound: 4 entries
+                {
+                    TAG_Short("id"): 3
+                    TAG_Short("Damage"): 0
+                    TAG_Byte("Count"): 4
+                    TAG_Byte("Slot"): 8
+                }
+                TAG_Compound: 4 entries
+                {
+                    TAG_Short("id"): 274
+                    TAG_Short("Damage"): 0
+                    TAG_Byte("Count"): 1
+                    TAG_Byte("Slot"): 9
+                }
+                TAG_Compound: 4 entries
+                {
+                    TAG_Short("id"): 274
+                    TAG_Short("Damage"): 0
+                    TAG_Byte("Count"): 1
+                    TAG_Byte("Slot"): 10
+                }
+                TAG_Compound: 4 entries
+                {
+                    TAG_Short("id"): 273
+                    TAG_Short("Damage"): 0
+                    TAG_Byte("Count"): 1
+                    TAG_Byte("Slot"): 11
+                }
+                TAG_Compound: 4 entries
+                {
+                    TAG_Short("id"): 274
+                    TAG_Short("Damage"): 0
+                    TAG_Byte("Count"): 1
+                    TAG_Byte("Slot"): 18
+                }
+                TAG_Compound: 4 entries
+                {
+                    TAG_Short("id"): 273
+                    TAG_Short("Damage"): 0
+                    TAG_Byte("Count"): 1
+                    TAG_Byte("Slot"): 19
+                }
+                TAG_Compound: 4 entries
+                {
+                    TAG_Short("id"): 291
+                    TAG_Short("Damage"): 0
+                    TAG_Byte("Count"): 1
+                    TAG_Byte("Slot"): 22
+                }
+                TAG_Compound: 4 entries
+                {
+                    TAG_Short("id"): 263
+                    TAG_Short("Damage"): 0
+                    TAG_Byte("Count"): 14
+                    TAG_Byte("Slot"): 26
+                }
+                TAG_Compound: 4 entries
+                {
+                    TAG_Short("id"): 274
+                    TAG_Short("Damage"): 0
+                    TAG_Byte("Count"): 1
+                    TAG_Byte("Slot"): 27
+                }
+                TAG_Compound: 4 entries
+                {
+                    TAG_Short("id"): 273
+                    TAG_Short("Damage"): 0
+                    TAG_Byte("Count"): 1
+                    TAG_Byte("Slot"): 28
+                }
+                TAG_Compound: 4 entries
+                {
+                    TAG_Short("id"): 272
+                    TAG_Short("Damage"): 0
+                    TAG_Byte("Count"): 1
+                    TAG_Byte("Slot"): 30
+                }
+                TAG_Compound: 4 entries
+                {
+                    TAG_Short("id"): 291
+                    TAG_Short("Damage"): 0
+                    TAG_Byte("Count"): 1
+                    TAG_Byte("Slot"): 31
+                }
+                TAG_Compound: 4 entries
+                {
+                    TAG_Short("id"): 326
+                    TAG_Short("Damage"): 0
+                    TAG_Byte("Count"): 1
+                    TAG_Byte("Slot"): 33
+                }
+            }
+            TAG_List("Pos"): 3 entries of type TAG_Double
+            {
+                TAG_Double: 292.952445946266
+                TAG_Double: 78.6200000047684
+                TAG_Double: 364.287147669336
+            }
+            TAG_Short("AttackTime"): 0
+            TAG_Short("Fire"): -20
+            TAG_Float("FallDistance"): 0
+            TAG_List("Rotation"): 2 entries of type TAG_Float
+            {
+                TAG_Float: -11565.46
+                TAG_Float: 8.249827
+            }
+            TAG_Int("Score"): 0
+            TAG_Short("DeathTime"): 0
+        }
+        TAG_Int("SpawnX"): 220
+        TAG_Int("SpawnY"): 64
+        TAG_Int("SpawnZ"): 443
+        TAG_Long("SizeOnDisk"): 6658419
+        TAG_Long("RandomSeed"): -2451905027594237963
+    }
+}

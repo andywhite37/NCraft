@@ -16,6 +16,7 @@ namespace NCraft.Console.Test
                 //var file = @"bigtest.nbt.gz";
                 //var file = @"level.dat";
                 var file = @"c.0.0.dat";
+
                 var path = Path.Combine(directory, file);
 
                 var tag = NbtFile.Load(path);

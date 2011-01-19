@@ -9,8 +9,18 @@ using NCraft.Util;
 
 namespace NCraft
 {
+    /// <summary>
+    /// Contains methods to load and save an NBT (Named Binary Tag) file.
+    /// </summary>
     public class NbtFile
     {
+        /// <summary>
+        /// Loads a Tag from the given file.
+        /// Note: according to the spec, an NBT file should contain exactly one "TAG_Compound"
+        /// tag, so this could probably return CompoundTag.
+        /// </summary>
+        /// <param name="filePath"></param>
+        /// <returns></returns>
         public static Tag Load(string filePath)
         {
             return Load(filePath, true);

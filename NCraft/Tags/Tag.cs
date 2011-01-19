@@ -77,10 +77,9 @@ namespace NCraft.Tags
         public T[] Items { get; set; }
         public int Length { get; set; }
 
-        public T this[int index]
+        public T Get(int i)
         {
-            get { return Items[index]; }
-            set { Items[index] = value; }
+            return Items[i];
         }
     }
 
@@ -88,16 +87,64 @@ namespace NCraft.Tags
     {
         public List<T> Items { get; set; }
 
-        public T this[int index]
+        private TTag GetTag<TTag>(int i) where TTag : Tag
         {
-            get { return Items[index]; }
-            set { Items[index] = value; }
+            return Items[i] as TTag;
         }
 
-        public T this[string name]
+        private TTag GetTag<TTag>(string name) where TTag : Tag
         {
-            get { return Items.Single(t => t.Name == name); }
-            set { this[name] = value; }
+            return Items.Single(t => t.Name == name) as TTag;
+        }
+
+        public byte GetByte(string name)
+        {
+            return GetTag<ByteTag>(name).Value;
+        }
+
+        public short GetShort(string name)
+        {
+            return GetTag<ShortTag>(name).Value;
+        }
+
+        public int GetInt(string name)
+        {
+            return GetTag<IntTag>(name).Value;
+        }
+
+        public long GetLong(string name)
+        {
+            return GetTag<LongTag>(name).Value;
+        }
+
+        public float GetFloat(string name)
+        {
+            return GetTag<FloatTag>(name).Value;
+        }
+
+        public double GetDouble(string name)
+        {
+            return GetTag<DoubleTag>(name).Value;
+        }
+
+        public string GetString(string name)
+        {
+            return GetTag<StringTag>(name).Value;
+        }
+
+        public ByteArrayTag GetByteArrayTag(string name)
+        {
+            return GetTag<ByteArrayTag>(name);
+        }
+
+        public ListTag GetListTag(string name)
+        {
+            return GetTag<ListTag>(name);
+        }
+
+        public CompoundTag GetCompoundTag(string name)
+        {
+            return GetTag<CompoundTag>(name);
         }
     }
 }

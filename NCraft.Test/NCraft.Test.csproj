@@ -61,6 +61,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Map\LevelFixture.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="NbtFileFixture.cs" />
@@ -68,6 +69,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="TestFiles\bigtest.nbt.txt" />
+    <Content Include="TestFiles\level.dat.txt" />
     <Content Include="TestFiles\test.nbt.txt" />
   </ItemGroup>
   <ItemGroup>
@@ -75,6 +77,7 @@
     <None Include="TestFiles\bigtest.nbt" />
     <None Include="TestFiles\bigtest.nbt.gz" />
     <None Include="TestFiles\c.0.0.dat" />
+    <None Include="TestFiles\level" />
     <None Include="TestFiles\level.dat" />
     <None Include="TestFiles\test.nbt" />
     <None Include="TestFiles\test.nbt.gz" />
