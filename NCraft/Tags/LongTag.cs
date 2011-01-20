@@ -11,6 +11,26 @@ namespace NCraft.Tags
     {
         public override byte Type { get { return TagType.Long; } }
 
+        public LongTag()
+            : base()
+        {
+        }
+
+        public LongTag(string name)
+            : base(name)
+        {
+        }
+
+        public LongTag(long value)
+            : base(value)
+        {
+        }
+
+        public LongTag(string name, long value)
+            : base(name, value)
+        {
+        }
+
         public override void ReadFrom(Stream stream, bool readName)
         {
             base.ReadFrom(stream, readName);

@@ -7,13 +7,30 @@ using NCraft.Util;
 
 namespace NCraft.Tags
 {
-    public class CompoundTag : ListTag<Tag>
+    public class CompoundTag : TagListTag
     {
         public override byte Type { get { return TagType.Compound; } }
 
         public CompoundTag()
+            : base()
         {
             Items = new List<Tag>();
+        }
+
+        public CompoundTag(string name)
+            : base(name)
+        {
+            Items = new List<Tag>();
+        }
+
+        public CompoundTag(List<Tag> items)
+            : base(items)
+        {
+        }
+
+        public CompoundTag(string name, List<Tag> items)
+            : base(name, items)
+        {
         }
 
         public override void ReadFrom(Stream stream, bool readName)

@@ -149,7 +149,7 @@ namespace NCraft.Levels
             HurtTime = tag.GetShort(HURT_TIME);
             Health = tag.GetShort(HEALTH);
             Dimension = tag.GetInt(DIMENSION);
-            Air = tag.GetByte(AIR);
+            Air = tag.GetShort(AIR);
             Inventory = new Inventory(tag.GetListTag(Inventory.INVENTORY));
             Pos = new Pos(tag.GetListTag(Pos.POS));
             AttackTime = tag.GetShort(ATTACK_TIME);

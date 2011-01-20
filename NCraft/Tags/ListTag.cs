@@ -7,7 +7,12 @@ using NCraft.Util;
 
 namespace NCraft.Tags
 {
-    public class ListTag : ArrayTag<Tag>
+    /// <summary>
+    /// Represents a TAG_List.
+    /// Note: this inherits from TagArrayTag rather than TagListTag because the way it's stored
+    /// in an NBT file is actually more array-like than list-like (length is fixed, etc.)
+    /// </summary>
+    public class ListTag : TagArrayTag
     {
         public override byte Type { get { return TagType.List; } }
 

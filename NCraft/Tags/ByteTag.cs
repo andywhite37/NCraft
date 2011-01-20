@@ -11,6 +11,26 @@ namespace NCraft.Tags
     {
         public override byte Type { get { return TagType.Byte; } }
 
+        public ByteTag()
+            : base()
+        {
+        }
+
+        public ByteTag(string name)
+            : base(name)
+        {
+        }
+
+        public ByteTag(byte value)
+            : base(value)
+        {
+        }
+
+        public ByteTag(string name, byte value)
+            : base(name, value)
+        {
+        }
+
         public override void ReadFrom(Stream stream, bool readName)
         {
             base.ReadFrom(stream, readName);

@@ -11,6 +11,26 @@ namespace NCraft.Tags
     {
         public override byte Type { get { return TagType.Short; } }
 
+        public ShortTag()
+            : base()
+        {
+        }
+
+        public ShortTag(string name)
+            : base(name)
+        {
+        }
+
+        public ShortTag(short value)
+            : base(value)
+        {
+        }
+
+        public ShortTag(string name, short value)
+            : base(name, value)
+        {
+        }
+
         public override void ReadFrom(Stream stream, bool readName)
         {
             base.ReadFrom(stream, readName);

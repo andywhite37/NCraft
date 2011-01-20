@@ -7,9 +7,12 @@ using NCraft.Util;
 
 namespace NCraft.Tags
 {
-    public class ByteArrayTag : ArrayTag<byte>
+    public class ByteArrayTag : Tag
     {
         public override byte Type { get { return TagType.ByteArray; } }
+
+        public int Length { get; set; }
+        public byte[] Items { get; set; }
 
         public override void ReadFrom(Stream stream, bool readName)
         {
