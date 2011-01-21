@@ -10,9 +10,32 @@ namespace NCraft.Tags
     public class ByteArrayTag : Tag
     {
         public override byte Type { get { return TagType.ByteArray; } }
-
         public int Length { get; set; }
         public byte[] Items { get; set; }
+
+        public ByteArrayTag()
+            : base()
+        {
+        }
+
+        public ByteArrayTag(string name)
+            : base(name)
+        {
+        }
+
+        public ByteArrayTag(byte[] items)
+            : base()
+        {
+            Length = items.Length;
+            Items = items;
+        }
+
+        public ByteArrayTag(string name, byte[] items)
+            : base(name)
+        {
+            Length = items.Length;
+            Items = items;
+        }
 
         public override void ReadFrom(Stream stream, bool readName)
         {

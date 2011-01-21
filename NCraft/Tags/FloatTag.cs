@@ -7,9 +7,29 @@ using NCraft.Util;
 
 namespace NCraft.Tags
 {
-    public class FloatTag : Tag<float>
+    public class FloatTag : ValueTag<float>
     {
         public override byte Type { get { return TagType.Float; } }
+
+        public FloatTag()
+            : base()
+        {
+        }
+        
+        public FloatTag(string name)
+            : base(name)
+        {
+        }
+
+        public FloatTag(float value)
+            : base(value)
+        {
+        }
+
+        public FloatTag(string name, float value)
+            : base(name, value)
+        {
+        }
 
         public override void ReadFrom(Stream stream, bool readName)
         {

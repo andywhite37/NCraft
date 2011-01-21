@@ -61,7 +61,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Map\LevelFixture.cs" />
+    <Compile Include="World\LevelFixture.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="NbtFileFixture.cs" />
@@ -76,11 +76,16 @@
     <None Include="App.config" />
     <None Include="TestFiles\bigtest.nbt" />
     <None Include="TestFiles\bigtest.nbt.gz" />
+    <None Include="TestFiles\bigtest.nbt.out" />
+    <None Include="TestFiles\bigtest.nbt.out.gz" />
     <None Include="TestFiles\c.0.0.dat" />
     <None Include="TestFiles\level" />
     <None Include="TestFiles\level.dat" />
+    <None Include="TestFiles\level.dat.out" />
     <None Include="TestFiles\test.nbt" />
     <None Include="TestFiles\test.nbt.gz" />
+    <None Include="TestFiles\test.nbt.out" />
+    <None Include="TestFiles\test.nbt.out.gz" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\NCraft\NCraft.csproj">

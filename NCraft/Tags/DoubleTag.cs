@@ -7,7 +7,7 @@ using NCraft.Util;
 
 namespace NCraft.Tags
 {
-    public class DoubleTag : Tag<double>
+    public class DoubleTag : ValueTag<double>
     {
         public override byte Type { get { return TagType.Double; } }
 

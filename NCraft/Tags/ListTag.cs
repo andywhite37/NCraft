@@ -15,8 +15,27 @@ namespace NCraft.Tags
     public class ListTag : TagArrayTag
     {
         public override byte Type { get { return TagType.List; } }
-
         public byte ItemType { get; set; }
+
+        public ListTag()
+            : base()
+        {
+        }
+
+        public ListTag(string name)
+            : base(name)
+        {
+        }
+
+        public ListTag(Tag[] items)
+            : base(items)
+        {
+        }
+
+        public ListTag(string name, Tag[] items)
+            : base(name, items)
+        {
+        }
 
         public override void ReadFrom(Stream stream, bool readName)
         {

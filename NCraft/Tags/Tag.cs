@@ -8,26 +8,56 @@ using NCraft.Util;
 
 namespace NCraft.Tags
 {
+    /// <summary>
+    /// Base class for all TAG types
+    /// </summary>
     public abstract class Tag
     {
+        /// <summary>
+        /// Type ID of Tag
+        /// </summary>
         public abstract byte Type { get; }
+
+        /// <summary>
+        /// Type Name of Tag
+        /// </summary>
         public string TypeName { get { return TagType.GetName(Type); } }
+
+        /// <summary>
+        /// Name of Tag
+        /// </summary>
         public string Name { get; set; }
 
+        /// <summary>
+        /// Default constructor
+        /// </summary>
         public Tag()
         {
         }
 
+        /// <summary>
+        /// Construct with Name
+        /// </summary>
+        /// <param name="name"></param>
         public Tag(string name)
         {
             Name = name;
         }
 
+        /// <summary>
+        /// Base method to read Tag from a Stream, including the name.
+        /// </summary>
+        /// <param name="stream"></param>
         public void ReadFrom(Stream stream)
         {
             ReadFrom(stream, true);
         }
 
+        /// <summary>
+        /// Base method to read this Tag from a Stream, with the option of reading the name.
+        /// </summary>
+        /// <param name="stream"></param>
+        /// <param name="readName"></param>
         public virtual void ReadFrom(Stream stream, bool readName)
         {
             if (readName)
@@ -36,11 +66,21 @@ namespace NCraft.Tags
             }
         }
 
+        /// <summary>
+        /// Base method to write this Tag to a Stream, including the Type and Name.
+        /// </summary>
+        /// <param name="stream"></param>
         public void WriteTo(Stream stream)
         {
             WriteTo(stream, true, true);
         }
 
+        /// <summary>
+        /// Base method to write this Tag to a Stream, with the option of writing the Type and Name
+        /// </summary>
+        /// <param name="stream"></param>
+        /// <param name="writeType"></param>
+        /// <param name="writeName"></param>
         public virtual void WriteTo(Stream stream, bool writeType, bool writeName)
         {
             if (writeType)
@@ -54,39 +94,75 @@ namespace NCraft.Tags
             }
         }
 
+        /// <summary>
+        /// Converts this Tag to a String
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             return ToString("");
         }
 
+        /// <summary>
+        /// Converts this Tag to a String, indented by indent
+        /// </summary>
+        /// <returns></returns>
         public abstract string ToString(string indent);
     }
 
-    public abstract class Tag<T> : Tag
+    /// <summary>
+    /// Base class for a tag that contains a single value.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    public abstract class ValueTag<T> : Tag
     {
+        /// <summary>
+        /// The "payload" value of this Tag.
+        /// </summary>
         public T Value { get; set; }
 
-        public Tag()
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        public ValueTag()
             : base()
         {
         }
 
-        public Tag(string name)
+        /// <summary>
+        /// Construct with Name
+        /// </summary>
+        /// <param name="name"></param>
+        public ValueTag(string name)
             : base(name)
         {
         }
 
-        public Tag(T value)
+        /// <summary>
+        /// Construct with Value
+        /// </summary>
+        /// <param name="value"></param>
+        public ValueTag(T value)
         {
             Value = value;
         }
 
-        public Tag(string name, T value)
+        /// <summary>
+        /// Construct with Name and Value
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="value"></param>
+        public ValueTag(string name, T value)
             : base(name)
         {
             Value = value;
         }
 
+        /// <summary>
+        /// Converts this Tag to an indented string
+        /// </summary>
+        /// <param name="indent"></param>
+        /// <returns></returns>
         public override string ToString(string indent)
         {
             var sb = new StringBuilder();
@@ -102,37 +178,75 @@ namespace NCraft.Tags
         }
     }
 
+    /// <summary>
+    /// Base class for a Tag that contains an Array of Tags
+    /// </summary>
     public abstract class TagArrayTag : Tag
     {
+        /// <summary>
+        /// Array of Tags contained by this Tag
+        /// </summary>
         public Tag[] Items { get; set; }
+
+        /// <summary>
+        /// Length of the Tag Array
+        /// </summary>
         public int Length { get; set; }
 
+        /// <summary>
+        /// Default constructor
+        /// </summary>
         public TagArrayTag()
             : base()
         {
         }
 
+        /// <summary>
+        /// Construct with Name
+        /// </summary>
+        /// <param name="name"></param>
         public TagArrayTag(string name)
             : base(name)
         {
         }
 
+        /// <summary>
+        /// Construct with Items
+        /// </summary>
+        /// <param name="items"></param>
         public TagArrayTag(Tag[] items)
         {
             Items = items;
         }
 
+        /// <summary>
+        /// Construct with Name and Items
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="items"></param>
         public TagArrayTag(string name, Tag[] items)
             : base(name)
         {
             Items = items;
         }
 
+        /// <summary>
+        /// Gets the Tag at index i, cast as type T
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="i"></param>
+        /// <returns></returns>
         public T GetTag<T>(int i) where T : Tag
         {
             return (T)Items[i];
         }
 
+        /// <summary>
+        /// Sets the specified Tag at index i
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="i"></param>
+        /// <param name="tag"></param>
         public void SetTag<T>(int i, T tag) where T : Tag
         {
             Items[i] = tag;
@@ -239,53 +353,102 @@ namespace NCraft.Tags
         }
     }
 
+    /// <summary>
+    /// Base class for a Tag that contains a List of Tags
+    /// </summary>
     public abstract class TagListTag : Tag
     {
+        /// <summary>
+        /// List of Tags contained by this Tag
+        /// </summary>
         public List<Tag> Items { get; set; }
 
+        /// <summary>
+        /// Default constructor
+        /// </summary>
         public TagListTag()
             : base()
         {
         }
 
+        /// <summary>
+        /// Construct with Name
+        /// </summary>
+        /// <param name="name"></param>
         public TagListTag(string name)
             : base(name)
         {
         }
 
+        /// <summary>
+        /// Construct with Items
+        /// </summary>
+        /// <param name="items"></param>
         public TagListTag(List<Tag> items)
         {
             Items = items;
         }
 
+        /// <summary>
+        /// Construct with Name and Items
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="items"></param>
         public TagListTag(string name, List<Tag> items)
             : base(name)
         {
             Items = items;
         }
 
+        /// <summary>
+        /// Finds the index of the Tag with Name == name
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
         public int FindIndex(string name)
         {
             return Items.FindIndex(i => i.Name == name);
         }
 
+        /// <summary>
+        /// Accesses the tag at the given index
+        /// </summary>
+        /// <param name="index"></param>
+        /// <returns></returns>
         public Tag this[int index]
         {
             get { return Items[index]; }
             set { Items[index] = value; }
         }
 
+        /// <summary>
+        /// Accesses the tag with the given name
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
         public Tag this[string name]
         {
             get { return Items[FindIndex(name)]; }
             set { Items[FindIndex(name)] = value; }
         }
 
+        /// <summary>
+        /// Gets the Tag of type T with Name == name
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="name"></param>
+        /// <returns></returns>
         private T GetTag<T>(string name) where T : Tag
         {
             return (T)this[name];
         }
 
+        /// <summary>
+        /// Sets the Tag with Name == name
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="name"></param>
+        /// <param name="tag"></param>
         private void SetTag<T>(string name, T tag) where T : Tag
         {
             this[name] = tag;
@@ -391,11 +554,23 @@ namespace NCraft.Tags
             SetTag<CompoundTag>(name, tag);
         }
 
+        /// <summary>
+        /// Gets the Tag of type T at index i
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="i"></param>
+        /// <returns></returns>
         public T GetTag<T>(int i) where T : Tag
         {
             return (T)Items[i];
         }
 
+        /// <summary>
+        /// Sets the Tag at index i
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="i"></param>
+        /// <param name="tag"></param>
         public void SetTag<T>(int i, T tag) where T : Tag
         {
             Items[i] = tag;

@@ -7,7 +7,7 @@ using NCraft.Util;
 
 namespace NCraft.Tags
 {
-    public class ShortTag : Tag<short>
+    public class ShortTag : ValueTag<short>
     {
         public override byte Type { get { return TagType.Short; } }
 

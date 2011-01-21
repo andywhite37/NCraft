@@ -51,7 +51,7 @@ namespace NCraft
 
         public static void Save(Tag tag, string filePath, bool isGZipped)
         {
-            using (var fileStream = new FileStream(filePath, FileMode.OpenOrCreate, FileAccess.Write))
+            using (var fileStream = new FileStream(filePath, FileMode.Create, FileAccess.Write))
             {
                 if (isGZipped)
                 {

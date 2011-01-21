@@ -7,7 +7,7 @@ using NCraft.Util;
 
 namespace NCraft.Tags
 {
-    public class LongTag : Tag<Int64>
+    public class LongTag : ValueTag<long>
     {
         public override byte Type { get { return TagType.Long; } }
 

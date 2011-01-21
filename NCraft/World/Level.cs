@@ -4,11 +4,15 @@ using System.Linq;
 using System.Text;
 using NCraft.Tags;
 
-namespace NCraft.Levels
+namespace NCraft.World
 {
     public class Level
     {
         public Data Data { get; set; }
+
+        public Level()
+        {
+        }
 
         public Level(CompoundTag tag)
         {
@@ -38,6 +42,7 @@ namespace NCraft.Levels
         {
             return new CompoundTag()
             {
+                Name = "",
                 Items = new List<Tag>()
                 {
                     Data.SaveToTag(),
@@ -67,6 +72,10 @@ namespace NCraft.Levels
         public long SizeOnDisk { get; set; }
         public long RandomSeed { get; set; }
 
+        public Data()
+        {
+        }
+
         public Data(CompoundTag dataTag)
         {
             LoadFromTag(dataTag);
@@ -91,14 +100,14 @@ namespace NCraft.Levels
                 Name = DATA,
                 Items = new List<Tag>()
                 {
-                    new LongTag() { Name = TIME, Value = Time, },
-                    new LongTag() { Name = LAST_PLAYED, Value = LastPlayed, },
+                    new LongTag(TIME, Time),
+                    new LongTag(LAST_PLAYED, LastPlayed),
                     Player.SaveToTag(),
-                    new IntTag() { Name = SPAWN_X, Value = SpawnX, },
-                    new IntTag() { Name = SPAWN_Y, Value = SpawnY, },
-                    new IntTag() { Name = SPAWN_Z, Value = SpawnZ, },
-                    new LongTag() { Name = SIZE_ON_DISK, Value = SizeOnDisk, },
-                    new LongTag() { Name = RANDOM_SEED, Value = RandomSeed, },
+                    new IntTag(SPAWN_X, SpawnX),
+                    new IntTag(SPAWN_Y, SpawnY),
+                    new IntTag(SPAWN_Z, SpawnZ),
+                    new LongTag(SIZE_ON_DISK, SizeOnDisk),
+                    new LongTag(RANDOM_SEED, RandomSeed),
                 },
             };
 
@@ -137,6 +146,10 @@ namespace NCraft.Levels
         public int Score { get; set; }
         public short DeathTime { get; set; }
 
+        public Player()
+        {
+        }
+
         public Player(CompoundTag playerTag)
         {
             LoadFromTag(playerTag);
@@ -168,7 +181,19 @@ namespace NCraft.Levels
                 Items = new List<Tag>()
                 {
                     Motion.SaveToTag(),
-                    new ByteTag() { Name = ON_GROUND, Value = OnGround, },
+                    new ByteTag(ON_GROUND, OnGround),
+                    new ShortTag(HURT_TIME, HurtTime),
+                    new ShortTag(HEALTH, Health),
+                    new IntTag(DIMENSION, Dimension),
+                    new ShortTag(AIR, Air),
+                    Inventory.SaveToTag(),
+                    Pos.SaveToTag(),
+                    new ShortTag(ATTACK_TIME, AttackTime),
+                    new ShortTag(FIRE, Fire),
+                    new FloatTag(FALL_DISTANCE, FallDistance),
+                    Rotation.SaveToTag(),
+                    new IntTag(SCORE, Score),
+                    new ShortTag(DEATH_TIME, DeathTime),
                 },
             };
         }
@@ -178,6 +203,14 @@ namespace NCraft.Levels
     {
         public const string POS = "Pos";
 
+        public double X { get; set; }
+        public double Y { get; set; }
+        public double Z { get; set; }
+
+        public Pos()
+        {
+        }
+
         public Pos(ListTag tag)
         {
             LoadFromTag(tag);
@@ -185,12 +218,24 @@ namespace NCraft.Levels
 
         public void LoadFromTag(ListTag tag)
         {
+            X = tag.GetDouble(0);
+            Y = tag.GetDouble(1);
+            Z = tag.GetDouble(2);
         }
 
         public Tag SaveToTag()
         {
             return new ListTag()
             {
+                Name = POS,
+                ItemType = TagType.Double,
+                Length = 3,
+                Items = new Tag[]
+                {
+                    new DoubleTag(X),
+                    new DoubleTag(Y),
+                    new DoubleTag(Z),
+                },
             };
         }
     }
@@ -199,6 +244,13 @@ namespace NCraft.Levels
     {
         public const string ROTATION = "Rotation";
 
+        public float YawDegrees { get; set; }
+        public float PitchDegrees { get; set; }
+
+        public Rotation()
+        {
+        }
+
         public Rotation(ListTag tag)
         {
             LoadFromTag(tag);
@@ -206,12 +258,22 @@ namespace NCraft.Levels
 
         public void LoadFromTag(ListTag tag)
         {
+            YawDegrees = tag.GetFloat(0);
+            PitchDegrees = tag.GetFloat(1);
         }
 
         public Tag SaveToTag()
         {
             return new ListTag()
             {
+                Name = ROTATION,
+                ItemType = TagType.Float,
+                Length = 2,
+                Items = new Tag[]
+                {
+                    new FloatTag(YawDegrees),
+                    new FloatTag(PitchDegrees),
+                },
             };
         }
     }
@@ -220,7 +282,13 @@ namespace NCraft.Levels
     {
         public const string MOTION = "Motion";
 
-        public List<double> Values { get; set; }
+        public double DX { get; set; }
+        public double DY { get; set; }
+        public double DZ { get; set; }
+
+        public Motion()
+        {
+        }
 
         public Motion(ListTag tag)
         {
@@ -229,7 +297,9 @@ namespace NCraft.Levels
 
         public void LoadFromTag(ListTag tag)
         {
-            Values = tag.Items.Cast<DoubleTag>().Select(t => t.Value).ToList();
+            DX = tag.GetDouble(0);
+            DY = tag.GetDouble(1);
+            DZ = tag.GetDouble(2);
         }
 
         public ListTag SaveToTag()
@@ -238,8 +308,13 @@ namespace NCraft.Levels
             {
                 Name = MOTION,
                 ItemType = TagType.Double,
-                Length = Values.Count,
-                Items = Values.ConvertAll(i => new DoubleTag() { Value = i }).ToArray<Tag>(),
+                Length = 3,
+                Items = new Tag[]
+                {
+                    new DoubleTag(DX),
+                    new DoubleTag(DY),
+                    new DoubleTag(DZ),
+                },
             };
         }
     }
@@ -248,7 +323,12 @@ namespace NCraft.Levels
     {
         public const string INVENTORY = "Inventory";
 
-        public List<InventoryItem> InventoryItems { get; set; }
+        public List<InventoryItem> Items { get; set; }
+
+        public Inventory()
+        {
+            Items = new List<InventoryItem>();
+        }
 
         public Inventory(ListTag tag)
         {
@@ -257,7 +337,7 @@ namespace NCraft.Levels
 
         public void LoadFromTag(ListTag tag)
         {
-            InventoryItems = tag.Items.Cast<CompoundTag>().Select(t => new InventoryItem(t)).ToList();
+            Items = tag.Items.Cast<CompoundTag>().Select(t => new InventoryItem(t)).ToList();
         }
 
         public ListTag SaveToTag()
@@ -266,8 +346,8 @@ namespace NCraft.Levels
             {
                 Name = INVENTORY,
                 ItemType = TagType.Compound,
-                Length = InventoryItems.Count,
-                Items = InventoryItems.ConvertAll(i => i.SaveToTag()).ToArray<Tag>(),
+                Length = Items.Count,
+                Items = Items.ConvertAll(i => i.SaveToTag()).ToArray<Tag>(),
             };
         }
     }
@@ -283,6 +363,10 @@ namespace NCraft.Levels
         public short Damage { get; set; }
         public byte Count { get; set; }
         public byte Slot { get; set; }
+
+        public InventoryItem()
+        {
+        }
 
         public InventoryItem(CompoundTag tag)
         {
@@ -303,10 +387,10 @@ namespace NCraft.Levels
             {
                 Items = new List<Tag>()
                 {
-                    new ShortTag() { Name = ID, Value = Id, },
-                    new ShortTag() { Name = DAMAGE, Value = Damage, },
-                    new ByteTag() { Name = COUNT, Value = Count, },
-                    new ByteTag() { Name = SLOT, Value = Slot, },
+                    new ShortTag(ID, Id),
+                    new ShortTag(DAMAGE, Damage),
+                    new ByteTag(COUNT, Count),
+                    new ByteTag(SLOT, Slot),
                 },
             };
         }

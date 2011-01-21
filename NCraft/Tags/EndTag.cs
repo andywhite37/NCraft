@@ -10,6 +10,11 @@ namespace NCraft.Tags
     {
         public override byte Type { get { return TagType.End; } }
 
+        public EndTag()
+            : base()
+        {
+        }
+
         public override void ReadFrom(Stream stream, bool readName)
         {
             // No-op
