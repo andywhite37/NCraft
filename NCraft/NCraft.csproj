@@ -40,9 +40,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="World\Level.cs" />
+    <Compile Include="DataFiles\Chunks\ChunkFile.cs" />
+    <Compile Include="DataFiles\Worlds\CoordinateEncoder.cs" />
+    <Compile Include="DataFiles\Worlds\World.cs" />
+    <Compile Include="Util\ByteArrayExtensions.cs" />
+    <Compile Include="Util\StreamWriteExtensions.cs" />
+    <Compile Include="DataFiles\Chunks\Chunk.cs" />
+    <Compile Include="DataFiles\Levels\Level.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Util\StreamExtensions.cs" />
+    <Compile Include="Util\StreamReadExtensions.cs" />
     <Compile Include="NbtFile.cs" />
     <Compile Include="Tags\ByteArrayTag.cs" />
     <Compile Include="Tags\ByteTag.cs" />

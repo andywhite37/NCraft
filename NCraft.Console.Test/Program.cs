@@ -13,11 +13,14 @@ namespace NCraft.Console.Test
             try
             {
                 var directory = @"..\..\..\NCraft.Test\TestFiles\";
+
                 //var file = @"bigtest.nbt.gz";
                 //var file = @"level.dat";
                 var file = @"c.0.0.dat";
 
                 var path = Path.Combine(directory, file);
+                //var path = Path.Combine(directory, "World1", "1a", "1p", "c.-i.-3.dat");
+
 
                 var tag = NbtFile.Load(path);
 
