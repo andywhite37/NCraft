@@ -2,13 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using NCraft.DataFiles.Chunks;
 
-namespace NCraft.DataFiles.Worlds
+namespace NCraft.Util
 {
-    public class CoordinateEncoder
+    public class CoordinateUtil
     {
         private static string BASE_36_CHARS = "0123456789abcdefghijklmnopqrstuvwxyz";
 
+        /*
         public static int GetCoordinateFromDirectoryName(string name)
         {
             // Not sure if this is possible with the mod 63 in the reverse conversion 
@@ -18,6 +20,12 @@ namespace NCraft.DataFiles.Worlds
 
             //return result;
         }
+        */
+
+        public static int GetIndex(int x, int y, int z)
+        {
+            return (y + (z * Chunk.SizeY + (x * Chunk.SizeY * Chunk.SizeZ)));
+        }
 
         public static string GetDirectoryNameFromCoordinate(int coordinate)
         {
@@ -26,6 +34,7 @@ namespace NCraft.DataFiles.Worlds
             return ToBase36(coordinate);
         }
 
+        /*
         private static int ToBase10(string base36)
         {
             var isNegative = false;
@@ -51,6 +60,7 @@ namespace NCraft.DataFiles.Worlds
 
             return result;
         }
+        */
 
         private static string ToBase36(int base10)
         {

@@ -9,11 +9,11 @@ namespace NCraft.DataFiles.Chunks
 {
     public class Chunk
     {
-        public Level Level { get; set; }
-
         public const int SizeX = 16;
         public const int SizeY = 128;
         public const int SizeZ = 16;
+
+        public Level Level { get; set; }
 
         public Chunk()
         {
@@ -128,7 +128,7 @@ namespace NCraft.DataFiles.Chunks
         public const string BLOCKS = "Blocks";
 
         public int Length { get; set; }
-        public byte[] RawBlockIds { get; set; }
+        public byte[] BlockIds { get; set; }
 
         public Blocks()
         {
@@ -141,18 +141,25 @@ namespace NCraft.DataFiles.Chunks
 
         public byte GetBlockId(int x, int y, int z)
         {
-            return RawBlockIds[y + (z * Chunk.SizeY + (x * Chunk.SizeY * Chunk.SizeZ))];
+            var index = CoordinateUtil.GetIndex(x, y, z);
+            return BlockIds[index];
+        }
+
+        public void SetBlockId(int x, int y, int z, byte blockId)
+        {
+            var index = CoordinateUtil.GetIndex(x, y, z);
+            BlockIds[index] = blockId;
         }
 
         public void LoadFromTag(ByteArrayTag tag)
         {
-            RawBlockIds = tag.Items;
-            Length = RawBlockIds.Length;
+            BlockIds = tag.Items;
+            Length = BlockIds.Length;
         }
 
         public ByteArrayTag SaveToTag()
         {
-            return new ByteArrayTag(BLOCKS, RawBlockIds);
+            return new ByteArrayTag(BLOCKS, BlockIds);
         }
     }
 
@@ -555,6 +562,18 @@ namespace NCraft.DataFiles.Chunks
         public PackedWordData(ByteArrayTag tag)
         {
             LoadFromTag(tag);
+        }
+
+        public byte GetValue(int x, int y, int z)
+        {
+            var index = CoordinateUtil.GetIndex(x, y, z);
+            return Values[index];
+        }
+
+        public void SetValue(int x, int y, int z, byte value)
+        {
+            var index = CoordinateUtil.GetIndex(x, y, z);
+            Values[index] = value;
         }
 
         public void LoadFromTag(ByteArrayTag tag)

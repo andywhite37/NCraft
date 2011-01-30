@@ -16,12 +16,14 @@ namespace NCraft.Test.DataFiles.Worlds
         {
             var world = World.Load(@"..\..\TestFiles\World1");
 
-            foreach (var file in world.ChunkFiles)
-            {
-                var chunk = file.Load();
+            var minX = world.ChunkInfos.Min(cf => cf.XPos);
+            var maxX = world.ChunkInfos.Max(cf => cf.XPos);
 
-                Console.WriteLine("{0}: x = {1}, z = {2}", file, chunk.Level.XPos, chunk.Level.ZPos);
-            }
+            var minZ = world.ChunkInfos.Min(cf => cf.ZPos);
+            var maxZ = world.ChunkInfos.Max(cf => cf.ZPos);
+
+            Console.WriteLine("X: {0} -> {1}", minX, maxX);
+            Console.WriteLine("Z: {0} -> {1}", minZ, maxZ);
         }
     }
 }

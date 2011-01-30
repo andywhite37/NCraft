@@ -40,8 +40,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataFiles\Chunks\ChunkFile.cs" />
-    <Compile Include="DataFiles\Worlds\CoordinateEncoder.cs" />
+    <Compile Include="DataFiles\Chunks\BlockInfo.cs" />
+    <Compile Include="DataFiles\Chunks\ChunkInfo.cs" />
+    <Compile Include="Util\CoordinateUtil.cs" />
     <Compile Include="DataFiles\Worlds\World.cs" />
     <Compile Include="Util\ByteArrayExtensions.cs" />
     <Compile Include="Util\StreamWriteExtensions.cs" />

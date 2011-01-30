@@ -33,7 +33,7 @@ namespace NCraft.Test.DataFiles.Chunks
                     Blocks = new Blocks()
                     {
                         Length = 32768,
-                        RawBlockIds = new byte[32768],
+                        BlockIds = new byte[32768],
                     },
                     Data = new Data()
                     {
@@ -147,7 +147,7 @@ namespace NCraft.Test.DataFiles.Chunks
         {
             Assert.IsNotNull(b);
             Assert.AreEqual(32768, b.Length);
-            Assert.AreEqual(32768, b.RawBlockIds.Length);
+            Assert.AreEqual(32768, b.BlockIds.Length);
         }
     }
 }
